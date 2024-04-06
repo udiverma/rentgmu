@@ -1,0 +1,74 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: green; 
+  }
+  /***************************************************************************/
+  /*                         CSS FOR LISTINGS PAGE                           */
+  /***************************************************************************/
+  /* Header title and nav stuff */
+  .listings-header-container {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 0 20px;
+    border-bottom: 5px solid yellow;
+  }
+  
+  /* navigation bar (Home, Contact, Contact Us)*/
+  .listings-nav {
+    display: flex;
+    gap: 20px; 
+  }
+  
+  /* Nav Bar Style*/
+  .listings-a{
+    text-decoration: none;
+    color: blue; 
+    padding: 10px;
+  }
+  
+  /* Header title */
+  .listings-header-title {
+    font-size: 2em; 
+    color: yellow;
+  }
+  
+  /* Add box button*/
+  .listings-add-box-button {
+    position: fixed; 
+    bottom: 20px;
+    right: 20px; 
+    padding: 10px;
+    background-color: #f0f0f0; 
+    border: none;
+    border-radius: 5px; 
+    cursor: pointer; 
+  }
+  
+  /* Individual listing box */
+  .listings-box {
+    border: 2px solid #333; 
+    padding: 16px;
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow cause it looks cool*/ 
+    border-radius: 8px; 
+    display: inline-block; /* Makes the boxes line up in a row */
+    text-align: center;
+    background-color: #fff; 
+  }
+  
+  /* Box content */
+  .listings-box-content {
+    width: 100px; 
+    height: 100px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Space below the listing boxes and header*/
+  .listings-box-list {
+    padding-top: 20px; 
+  }
+  
