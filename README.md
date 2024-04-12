@@ -1,5 +1,6 @@
 # How to Run
 CODE >> SSH >> OPEN WITH GITHUB DESKTOP >> OPEN IN VSCODE
+MAKE SURE YOU ARE UNDER THE MASTER BRANCH
 
 # Install required node modules:
 ### `npm install`
