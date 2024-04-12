@@ -26,7 +26,7 @@ function App() {
   // let userName = "abc";
   // let passWord = "123";
 
-  // const [isUserSignedIn, setIsUserSignedIn] = useState(false);
+  const [isUserSignedIn, setIsUserSignedIn] = useState(false);
   // const [user, setUser] = useState({});
   const [bgColor, setbgColor] = useState("seagreen");
   const [currentPage, setCurrentPage] = useState("/Home");
@@ -66,6 +66,7 @@ function App() {
               element={
                 <SignInForm
                   setCurrentPage={setCurrentPage}
+                  setIsUserSignedIn={setIsUserSignedIn}
                   // setUser={setUser}
                   setbgColor={setbgColor}
                 />
