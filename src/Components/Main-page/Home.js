@@ -110,7 +110,7 @@ const Home = (props) => {
           Logout
         </a>
       </div>
-      <div className="search">
+      {/* <div className="search">
         <input
           placeholder="Search for Items"
           value={searchTerm}
@@ -121,7 +121,7 @@ const Home = (props) => {
           alt="search"
           onClick={() => searchItems(searchTerm)}
         />
-      </div>
+      </div> */}
       {console.log(items)};
       {items?.length > 0 ? (
         <div className="container">
