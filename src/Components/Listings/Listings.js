@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import Modal from '../Modal/Modal'
 import './listings.css'
 
-const Box = ({ info, onRemove, onClick }) => (
+const Box = ({ info, onRemove, onClick }) => {
+
+  const imageUrl = info.image ? URL.createObjectURL(info.image) : 'placeholder-image-url';
+  return(
   <div className="listings-box" onClick={() => onClick(info)}>
     <div className="listings-box-content">
       <div className='.listings-box-content-header'>
       <h2>Listing: {info.name}</h2>
+      {info.image && <img src={imageUrl} alt="Uploaded content" className='img'/>}
       </div>
-      <p className='.listings-box-content-description'>Description: {info.description}</p>
-      <p className ='.listings-box-content-payment'>Payments: {info.payments}</p>
+      {/* <p className='.listings-box-content-description'>Description: {info.description}</p>
+      <p className ='.listings-box-content-payment'>Payments: {info.payments}</p> */}
     </div>
     
     <button onClick={(e) => {
@@ -20,11 +24,12 @@ const Box = ({ info, onRemove, onClick }) => (
     </button>
 
   </div>
-);
+  );
+};
 
 const BoxList = () => {
   const [boxes, setBoxes] = useState([]);
-  const initialBoxInfo = { name: '', contact: '', description: '' };
+  const initialBoxInfo = { name: '', contact: '', description: '', image: null };
   const [newBoxInfo, setNewBoxInfo] = useState(initialBoxInfo);
   const [showModal, setShowModal] = useState(false);
   const [selectedBox, setSelectedBox] = useState(null);

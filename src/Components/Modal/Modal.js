@@ -29,8 +29,8 @@ export default function Modal({ onSubmit, onModalClose, newBoxInfo, setNewBoxInf
         // Display the clicked box's details
         <>
           <h2>{content.name}</h2>
-          <p>Payments: {content.payments}</p>
           <p>Description: {content.description}</p>
+          <p>Payments: {content.payments}</p>
           <button>Rent Item</button>
         </>
       ) : (
@@ -63,6 +63,13 @@ export default function Modal({ onSubmit, onModalClose, newBoxInfo, setNewBoxInf
               required
             />
           </label>
+          <label>
+          Image:
+          <input
+            type="file"
+            onChange={(e) => setNewBoxInfo({...newBoxInfo, image: e.target.files[0]})}
+          />
+        </label>
           <button type="submit">Submit</button>
           <button type="button" onClick={onModalClose}>Close</button>
         </form>
