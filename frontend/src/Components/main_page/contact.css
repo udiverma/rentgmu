@@ -1,0 +1,20 @@
+.contact-container {
+  background-color: rgba(44, 140, 71, 0.707);
+  padding-top: 10%;
+  padding-bottom: 10%;
+  padding-left: 20%;
+  padding-right: 20%;
+  margin: 1rem 1rem 0rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.contact-info {
+  color: white;
+  padding: 10%;
+}
+
+h2 {
+  color: white;
+}
