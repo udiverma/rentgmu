@@ -6,10 +6,16 @@
     "start-frontend": "cd frontend && npm start",
     "build-frontend": "cd frontend && npm run build",
     "test-frontend": "cd frontend && npm test",
-    "start": "npm run start-frontend",
-    "build": "npm run build-frontend",
-    "test": "npm run test-frontend",
+    "start-backend": "cd backend && npm start",
+    "build-backend": "echo 'Add backend build steps if necessary'",
+    "test-backend": "cd backend && npm test",
+    "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
+    "build": "npm run build-frontend && npm run build-backend",
+    "test": "concurrently \"npm run test-frontend\" \"npm run test-backend\"",
     "serve": "serve -s frontend/build"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
   },
   "author": "Udit Verma, Shaan Ahmed, Loc Nguyen",
   "license": "MIT"

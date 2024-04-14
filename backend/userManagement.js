@@ -7,7 +7,7 @@ class User {
     constructor(password, name, id, email, phone) {
         this.email = email;
         this.username = this.generateUsername(email);
-        this.password = this.hashPassword(password); // Use synchronous hashing
+        this.password = this.setPassword(password); // Use synchronous hashing
         this.name = name;
         this.id = id;
         this.phone = phone;
@@ -18,7 +18,7 @@ class User {
         return username;
     }
 
-    hashPassword(password) {
+    setPassword(password) {
         return bcrypt.hashSync(password, saltRounds); // Synchronous password hashing
     }
 
@@ -136,5 +136,6 @@ function writeUserToCSV(user, filename) {
 module.exports = {
     User,
     checkEmailExists,
+    verifyPassword,
     writeUserToCSV
 };

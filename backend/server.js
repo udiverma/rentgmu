@@ -5,6 +5,7 @@ const cors = require('cors');
 const app = express();
 const PORT = 3001;
 const userManagement = require('./userManagement'); 
+var id = 0;
 
 app.use(cors());
 app.use(express.json());
@@ -18,7 +19,8 @@ app.post('/signup', (req, res) => {
         if (exists) {
             return res.status(409).json({ success: false, message: 'Email already exists' });
         }
-        const newUser = new userManagement.User(password, name, Date.now().toString(), email, phone);
+        id += 1
+        const newUser = new userManagement.User(password, name, id, email, phone);
         newUser.setPassword(password); // This should ideally be synchronous or handled differently
         userManagement.writeUserToCSV(newUser, '/data/user/users.csv');
         res.json({ success: true, message: 'User registered successfully' });
