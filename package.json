@@ -1,16 +1,16 @@
 {
-    "name": "rent-gmu-project",
-    "version": "1.0.0",
-    "private": true,
-    "scripts": {
-        "start-frontend": "cd frontend && npm start",
-        "build-frontend": "cd frontend && npm run build",
-        "test-frontend": "cd frontend && npm test",
-        "start": "npm run start-frontend",
-        "build": "npm run build-frontend",
-        "test": "npm run test-frontend"
-      },
-    "author": "Udit Verma, Shaan Ahmed, Loc Nguyen",
-    "license": "MIT"
-  }
-  
+  "name": "rent-gmu-project",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start-frontend": "cd frontend && npm start",
+    "build-frontend": "cd frontend && npm run build",
+    "test-frontend": "cd frontend && npm test",
+    "start": "npm run start-frontend",
+    "build": "npm run build-frontend",
+    "test": "npm run test-frontend",
+    "serve": "serve -s frontend/build"
+  },
+  "author": "Udit Verma, Shaan Ahmed, Loc Nguyen",
+  "license": "MIT"
+}
