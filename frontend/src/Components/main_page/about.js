@@ -38,10 +38,41 @@ const About = (props) => {
             Logout
           </a>
         </div>
-        <div className="">about page</div>
+        <div className="about-container">
+          <div className="about-info">
+            <h1>About RentGMU </h1>
+            <br />
+            <p>
+              Welcome to RentGMU, your go-to platform for convenient renting and
+              renting out of miscellaneous items tailored specifically for
+              George Mason University (GMU) students. Founded by Shaan Ahmed,
+              Loc Nguyen, and Udit Verma, RentGMU aims to simplify the process
+              of accessing items needed for short-term or occasional use within
+              the university community.
+            </p>
+            <br />
+            <h2>Features</h2>
+            <br />
+            <p>
+              RentGMU offers an innovative solution to the common dilemma faced
+              by students: the need for items that are only required
+              temporarily, such as calculators for exams, textbooks for specific
+              classes, study aids like expo markers, or even a scooter to get
+              around campus. Our platform functions similarly to popular online
+              marketplaces, allowing users to find relevant listings with ease.
+              Each user can showcase the items they are offering for rent, along
+              with finding items to rent based on desired catergories. Renters
+              and item-owners are responsible for handling transaction as well
+              as accounting for loss of items or damages. Our goal is to create
+              an ease of access for students to rent out things while making
+              some cash on the side; we're college students after all!
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );
 };
 
 export default About;
+
