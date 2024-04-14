@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const csv = require('csv-parse');
 
 class User {
     constructor(password, name, id, email, phone) {
@@ -90,24 +91,38 @@ function checkEmailExists(email, filename, callback) {
 // Function to check password for a given username
 function verifyPassword(username, password, filename, callback) {
     const filePath = path.join(__dirname, filename);
-    try {
-        const data = fs.readFileSync(filePath, 'utf8');
-        const users = csvParser(data, {
+    fs.readFile(filePath, { encoding: 'utf8' }, (err, data) => {
+        if (err) {
+            console.error('Error reading from CSV file', err);
+            return callback(err);
+        }
+        
+        csv.parse(data, {
             columns: true,
             skip_empty_lines: true
+        }, (err, users) => {
+            if (err) {
+                console.error('Error parsing CSV data', err);
+                return callback(err);
+            }
+            
+            const user = users.find(u => u.Username.toLowerCase() === username.toLowerCase());
+            if (!user) {
+                return callback(null, false, 'User not found');
+            }
+            
+            bcrypt.compare(password, user.Password, (err, isMatch) => {
+                if (err) {
+                    console.error('Error comparing passwords', err);
+                    return callback(err);
+                }
+                callback(null, isMatch, isMatch ? 'Password is correct' : 'Password is incorrect');
+            });
         });
-
-        const user = users.find(u => u.username === username);
-        if (!user) {
-            return callback(null, false, 'User not found');
-        }
-
-        const isMatch = bcrypt.compareSync(password, user.password);
-        callback(null, isMatch, isMatch ? 'Password is correct' : 'Password is incorrect');
-    } catch (err) {
-        callback(err);
-    }
+    });
 }
+
+
 
 // Function to write user data to a CSV file
 function writeUserToCSV(user, filename) {

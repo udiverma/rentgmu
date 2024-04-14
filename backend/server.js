@@ -31,10 +31,10 @@ app.post('/verify-password', (req, res) => {
     const { username, password } = req.body;
     userManagement.verifyPassword(username, password, '/data/user/users.csv', (err, isMatch, message) => {
         if (err) {
-            return res.status(500).json({ success: false, message: 'Internal server error' });
+            return res.status(500).json({ success: false, message: 'Error verifying password' });
         }
         if (!isMatch) {
-            return res.status(401).json({ success: false, message });
+            return res.status(401).json({ success: false, message: 'Username or Password is incorrect' });
         }
         res.json({ success: true, message: 'Password verified successfully' });
     });

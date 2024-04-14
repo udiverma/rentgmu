@@ -1,1 +1,5 @@
 Username,Password,Name,ID,Email,Phone
+urmom,$2b$10$WZnuGDYY6d0rK5TbfdYzJuf025dVVhXAPsPuzw6LykE2GtQoAdHhm,Jane Doe,1,urmom@example.com,1234567890
+johnasd,$2b$10$u3pCGQ1BoViyAAyveZwFDu0/FOi4hq6jf3xGCZvN.HcFAkfGco3dG,John Doe,2,johnasd@example.com,1234567890
+johnasdaasd,$2b$10$8hRTZaW6tb4xjZwNa0THheYOFYOgXBCcb//C8jGvXo0UN/1Tj0zDi,John Doe,1,johnasdaasd@example.com,1234567890
+udiverma,$2b$10$BkVlGyRWB1yE7w8i6sSkjeGw35iH37.uAwrcCaCgAFc3DKMw8KqBi,John Doe,1,udiverma@example.com,1234567890

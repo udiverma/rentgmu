@@ -34,9 +34,9 @@ const SignInForm = (props) => {
     .then(data => {
       if (data.success) {
         props.setIsUserSignedIn(true);
-        window.localStorage.setItem("userInfo", JSON.stringify(data.user));
+        window.localStorage.setItem("userInfo", JSON.stringify({username, name: "User"})); // Assuming 'name' is needed
         window.localStorage.setItem("isLoggedIn", true);
-        window.location.reload(); // Or use navigate for better SPA behavior
+        navigate('/home'); // Adjust as needed, depending on your route setup
       } else {
         setError(data.message);
       }
@@ -45,8 +45,7 @@ const SignInForm = (props) => {
       setError("Failed to connect to the server. Please try again later.");
     });
 
-    setUsername("");
-    setPassword("");
+    // Clear inputs only on success or don't clear
   };
 
   const handleSignUp = () => {
@@ -57,7 +56,7 @@ const SignInForm = (props) => {
     <>
       <h1 className="signin-title">RENTGMU</h1>
       <div className="wrapper">
-        <form onSubmit={handleSubmit}>
+        <form action="">
           <h1>Login</h1>
           <div className="input-box">
             <input
@@ -94,8 +93,15 @@ const SignInForm = (props) => {
               </p>
             </center>
           )}
+          <div className="remember-forgot">
+            {/* <label>
+              <input type="checkbox" />
+              Remember me
+            </label> */}
+            {/* <a href="#f">Forgot Password?</a> */}
+          </div>
 
-          <button type="submit">
+          <button type="submit" onClick={handleSubmit}>
             Login
           </button>
 
@@ -112,5 +118,6 @@ const SignInForm = (props) => {
     </>
   );
 };
+
 
 export default SignInForm;
