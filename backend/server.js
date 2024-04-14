@@ -25,6 +25,19 @@ app.post('/signup', (req, res) => {
     });
 });
 
+app.post('/verify-password', (req, res) => {
+    const { username, password } = req.body;
+    userManagement.verifyPassword(username, password, '/data/user/users.csv', (err, isMatch, message) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Internal server error' });
+        }
+        if (!isMatch) {
+            return res.status(401).json({ success: false, message });
+        }
+        res.json({ success: true, message: 'Password verified successfully' });
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
