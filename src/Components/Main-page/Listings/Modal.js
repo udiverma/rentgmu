@@ -65,9 +65,11 @@ export default function Modal({
             // Display the clicked box's details
             <>
               <h2>{content.name}</h2>
-              <p>Payments: {content.payments}</p>
               <p>Description: {content.description}</p>
-              <button onClick={sendRequest}>Rent Item</button>
+              <p>Payments: {content.payments}</p>
+              <button onClick={sendRequest} className="modal-rent-item-btn">
+                Rent Item
+              </button>
             </>
           ) : (
             <form onSubmit={handleSubmit} className="modal-form">
@@ -109,6 +111,15 @@ export default function Modal({
                   }
                   required
                   className="modal-entry"
+                />
+              </div>
+              <div>
+                Image:
+                <input
+                  type="file"
+                  onChange={(e) =>
+                    setNewBoxInfo({ ...newBoxInfo, image: e.target.files[0] })
+                  }
                 />
               </div>
               <button className="modal-submit" type="submit">

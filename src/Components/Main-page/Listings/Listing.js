@@ -5,32 +5,47 @@ import "./Listing.css";
 const stringifiedUser = window.localStorage.getItem("userInfo");
 const currentUser = JSON.parse(stringifiedUser);
 
-const Box = ({ info, onRemove, onClick }) => (
-  <div className="listings-box" onClick={() => onClick(info)}>
-    <div className="listings-box-content">
-      <div className=".listings-box-content-header">
-        <h2>Listing: {info.name}</h2>
+const Box = ({ info, onRemove, onClick }) => {
+  const imageUrl = info.image
+    ? URL.createObjectURL(info.image)
+    : "placeholder-image-url";
+  return (
+    <div className="listings-box" onClick={() => onClick(info)}>
+      <div className="listings-box-content">
+        <div className=".listings-box-content-header">
+          <h3 className=".listings-box-content-header-name">{info.name}</h3>
+          {info.image && (
+            <img src={imageUrl} alt="Uploaded content" className="img" />
+          )}
+        </div>
+        {/* <p className=".listings-box-content-description">
+          Description: {info.description}
+        </p>
+        <p className=".listings-box-content-payment">
+          Payments: {info.payments}
+        </p> */}
       </div>
-      <p className=".listings-box-content-description">
-        Description: {info.description}
-      </p>
-      <p className=".listings-box-content-payment">Payments: {info.payments}</p>
+      <button
+        className="listings-box-btn"
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent click from bubbling up to the box click
+          onRemove();
+        }}
+      >
+        Remove
+      </button>
     </div>
-
-    <button
-      onClick={(e) => {
-        e.stopPropagation(); // Prevent click from bubbling up to the box click
-        onRemove();
-      }}
-    >
-      Remove
-    </button>
-  </div>
-);
+  );
+};
 
 const Listing = () => {
   const [boxes, setBoxes] = useState([]);
-  const initialBoxInfo = { name: "", contact: "", description: "" };
+  const initialBoxInfo = {
+    name: "",
+    contact: "",
+    description: "",
+    image: null,
+  };
   const [newBoxInfo, setNewBoxInfo] = useState(initialBoxInfo);
   const [showModal, setShowModal] = useState(false);
   const [selectedBox, setSelectedBox] = useState(null);
@@ -69,12 +84,13 @@ const Listing = () => {
       </div>
       <button
         className="listings-add-box-button"
+        title="Add new listing"
         onClick={() => {
           setShowModal(true);
           setSelectedBox(null);
         }}
       >
-        Add Box
+        <div className="plus-text">+</div>
       </button>
       {showModal && (
         <Modal

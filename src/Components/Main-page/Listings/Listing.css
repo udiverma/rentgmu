@@ -39,26 +39,46 @@ body {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  padding: 10px;
-  background-color: #f0f0f0;
-  border: none;
-  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  background-color: #4d4c4c;
   cursor: pointer;
+  transition: width 1s, height 1s, transform 1s;
+  border: 1px solid #3333338b;
+  color: white;
+  font-size: large;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow cause it looks cool*/
+}
+
+.plus-text {
+  padding: 35%;
+}
+:hover.listings-add-box-button {
+  transform: rotate(180deg) scale(1.06, 1.06);
+  opacity: 96%;
 }
 
 /* Individual listing box */
 .listings-box {
-  border: 2px solid #333;
+  border: 1px solid #333;
   padding: 16px;
   margin: 16px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow cause it looks cool*/
   border-radius: 8px;
   display: inline-block; /* Makes the boxes line up in a row */
   text-align: center;
-  background-color: #fff;
+  background-color: #42d3568e;
   color: #333;
 }
 
+:hover.listings-box {
+  background-color: #42d3556c;
+  cursor: pointer;
+  transform: scale(1.02, 1.02);
+}
 /* Box content */
 .listings-box-content {
   width: 250px;
@@ -105,11 +125,36 @@ body {
   align-items: center;
 }
 
-/* .listings-box-content-name{
-  display: flex;
-  justify-content: center;
+h3 {
+  color: rgb(0, 0, 0);
+  background-color: #f0f0f0c7;
+  border-radius: 8px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+
   align-items: center;
-} */
+}
+
+.img {
+  object-fit: cover;
+  width: 230px;
+  height: 235px;
+  margin-top: 5px;
+  border-radius: 8px;
+}
+
+.listings-box-btn {
+  padding: 2%;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+:hover.listings-box-btn {
+  /* transform: scale(1.05, 1.05); */
+  background-color: #ffffffc1;
+  cursor: pointer;
+}
 
 .listings-box-content-payment {
   display: flex;
@@ -143,5 +188,10 @@ body {
 
 .Listing-type-title {
   text-align: center;
-  padding: 5%;
+  padding: 3%;
+  background-color: #c2c2c273;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+
+  margin-top: 15px;
+  border-radius: 8px;
 }
