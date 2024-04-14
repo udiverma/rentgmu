@@ -1,9 +1,15 @@
-The codes provided is only the source folder of the React app.
-It is in standard react.js
+# How to Run
+CODE >> SSH >> OPEN WITH GITHUB DESKTOP >> OPEN IN VSCODE (MAKE SURE YOU ARE UNDER THE CORRECT BRANCH)
 
-To run:
-1. cd into the app directory
-2. npm start
+# Install required node modules:
+### `npm install`
 
-If there's an error with router-dom, try:
-npm install react-router-dom
+# Install router
+### `npm install react-router-dom`
+
+# In the project directory, you can run:
+### `npm start`
+
+# If you get an react-icon issue:
+### `npm install --save react-icons`
+
