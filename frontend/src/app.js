@@ -96,23 +96,41 @@ function App() {
             <Route
               path="/stationary"
               element={
-                <Stationary user={user} setCurrentPage={setCurrentPage} />
+                <Stationary
+                  user={user}
+                  setCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                />
               }
             />
             <Route
               path="/sport"
-              element={<Sport user={user} setCurrentPage={setCurrentPage} />}
+              element={
+                <Sport
+                  user={user}
+                  setCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                />
+              }
             />
             <Route
               path="/transportation"
               element={
-                <Transportation user={user} setCurrentPage={setCurrentPage} />
+                <Transportation
+                  user={user}
+                  setCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                />
               }
             />
             <Route
               path="/technology"
               element={
-                <Technology user={user} setCurrentPage={setCurrentPage} />
+                <Technology
+                  user={user}
+                  setCurrentPage={setCurrentPage}
+                  currentPage={currentPage}
+                />
               }
             />
           </Routes>

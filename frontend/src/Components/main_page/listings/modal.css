@@ -84,3 +84,18 @@ body.active-modal {
   cursor: pointer;
   transform: scale(1.02, 1.02);
 }
+
+.modal-rent-item-btn {
+  padding: 1.5%;
+  border-radius: 8px;
+  border: #9d9b9bb2;
+  cursor: pointer;
+  background-color: rgba(85, 226, 85, 0.729);
+  color: rgb(59, 55, 55);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow cause it looks cool*/
+}
+
+:hover.modal-rent-item-btn {
+  transform: scale(1.02, 1.02);
+  background-color: rgb(85, 226, 85);
+}
