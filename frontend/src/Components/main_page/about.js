@@ -61,7 +61,7 @@ const About = (props) => {
               around campus. Our platform functions similarly to popular online
               marketplaces, allowing users to find relevant listings with ease.
               Each user can showcase the items they are offering for rent, along
-              with finding items to rent based on desired catergories. Renters
+              with finding items to rent based on desired categories. Renters
               and item-owners are responsible for handling transaction as well
               as accounting for loss of items or damages. Our goal is to create
               an ease of access for students to rent out things while making
