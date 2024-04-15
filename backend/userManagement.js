@@ -2,12 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const csv = require('csv-parse');
 
 class User {
     constructor(password, name, id, email, phone) {
         this.email = email;
         this.username = this.generateUsername(email);
-        this.password = this.setPassword(password);
+        this.password = this.setPassword(password); // Use synchronous hashing
         this.name = name;
         this.id = id;
         this.phone = phone;
@@ -19,13 +20,7 @@ class User {
     }
 
     setPassword(password) {
-        bcrypt.hash(password, saltRounds, (err, hash) => {
-            if (err) {
-                console.error('Error hashing password', err);
-            } else {
-                this.password = hash;
-            }
-        });
+        return bcrypt.hashSync(password, saltRounds); // Synchronous password hashing
     }
 
     // Getters
@@ -93,6 +88,42 @@ function checkEmailExists(email, filename, callback) {
     });
 }
 
+// Function to check password for a given username
+function verifyPassword(username, password, filename, callback) {
+    const filePath = path.join(__dirname, filename);
+    fs.readFile(filePath, { encoding: 'utf8' }, (err, data) => {
+        if (err) {
+            console.error('Error reading from CSV file', err);
+            return callback(err);
+        }
+        
+        csv.parse(data, {
+            columns: true,
+            skip_empty_lines: true
+        }, (err, users) => {
+            if (err) {
+                console.error('Error parsing CSV data', err);
+                return callback(err);
+            }
+            
+            const user = users.find(u => u.Username.toLowerCase() === username.toLowerCase());
+            if (!user) {
+                return callback(null, false, 'User not found');
+            }
+            
+            bcrypt.compare(password, user.Password, (err, isMatch) => {
+                if (err) {
+                    console.error('Error comparing passwords', err);
+                    return callback(err);
+                }
+                callback(null, isMatch, isMatch ? 'Password is correct' : 'Password is incorrect');
+            });
+        });
+    });
+}
+
+
+
 // Function to write user data to a CSV file
 function writeUserToCSV(user, filename) {
     checkEmailExists(user.getEmail(), filename, (err, exists) => {
@@ -120,5 +151,6 @@ function writeUserToCSV(user, filename) {
 module.exports = {
     User,
     checkEmailExists,
+    verifyPassword,
     writeUserToCSV
 };
