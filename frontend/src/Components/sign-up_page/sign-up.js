@@ -12,7 +12,7 @@ function includeGmu(input) {
 }
 
 const SignUpForm = (props) => {
-  const [username, setUsername] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -21,11 +21,8 @@ const SignUpForm = (props) => {
   window.localStorage.removeItem("isLoggedIn");
   const navigate = useNavigate();
 
-  const exampleUser = "loc";
-  const examplePass = "123";
-
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handlePhoneChange = (event) => {
+    setPhoneNumber(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -45,10 +42,43 @@ const SignUpForm = (props) => {
     if (!includeGmu(email)) {
       setError("Please enter a GMU email");
     } else {
-      //Create profile
-      reloadPage();
+      fetch('http://localhost:3001/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          phone: phoneNumber
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Assuming the username is the part of the email before '@'
+          const username = email.substring(0, email.indexOf('@'));
+          
+          // Store user information and login status in local storage
+          window.localStorage.setItem("userInfo", JSON.stringify({ username, name }));
+          window.localStorage.setItem("isLoggedIn", "true");
+  
+          // Popup to inform the user about their username
+          alert(`Your username is: ${username}`);
+  
+          // Navigate to the home page
+          navigate('/home');
+        } else {
+          setError(data.message);
+        }
+      })
+      .catch(error => {
+        setError("Failed to register. Please try again later.");
+      });
     }
   };
+  
 
   const reloadPage = () => {
     window.location.reload();
@@ -71,22 +101,12 @@ const SignUpForm = (props) => {
           </div>
           <div className="input-box">
             <input
-              type="text"
+              type="email"
               placeholder="Email"
               required
               value={email}
               onChange={handleEmailChange}
             />
-          </div>
-          <div className="input-box">
-            <input
-              type="text"
-              placeholder="Username"
-              required
-              value={username}
-              onChange={handleUsernameChange}
-            />
-            <FaUser className="icon" />
           </div>
           <div className="input-box">
             <input
@@ -97,6 +117,16 @@ const SignUpForm = (props) => {
               onChange={handlePasswordChange}
             />
             <FaLock className="icon" />
+          </div>
+          <div className="input-box">
+            <input
+              type="text"
+              placeholder="Phone Number"
+              required
+              value={phoneNumber}
+              onChange={handlePhoneChange}
+            />
+            <FaUser className="icon" />
           </div>
 
           {error && (

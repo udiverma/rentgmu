@@ -48,7 +48,10 @@ const SignInForm = (props) => {
     // Clear inputs only on success or don't clear
   };
 
-  const handleSignUp = () => {
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    window.localStorage.setItem("isLoggedIn", true);
+    props.setCurrentPage("/signup");
     navigate("/signup");
   };
 
