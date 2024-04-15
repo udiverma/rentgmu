@@ -20,6 +20,7 @@ const SignInForm = (props) => {
     setPassword(event.target.value);
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     // API request to verify the username and password
@@ -34,7 +35,25 @@ const SignInForm = (props) => {
     .then(data => {
       if (data.success) {
         props.setIsUserSignedIn(true);
-        window.localStorage.setItem("userInfo", JSON.stringify({username, name: "User"})); // Assuming 'name' is needed
+        fetch(`http://localhost:3001/user/${username}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data && data.success) {
+                // Assuming the API response includes a 'data' field with user details
+                localStorage.setItem("userInfo", JSON.stringify(data.data));
+                console.log("User details updated successfully.");
+            } else {
+                console.log("No data received, check API response structure or endpoint.");
+            }
+        })
+        .catch(error => {
+            console.error("Failed to fetch user details:", error);
+        });
         window.localStorage.setItem("isLoggedIn", true);
         navigate('/home'); // Adjust as needed, depending on your route setup
       } else {

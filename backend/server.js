@@ -40,6 +40,20 @@ app.post('/verify-password', (req, res) => {
     });
 });
 
+// Add this route to your server.js file
+app.get('/user/:username', (req, res) => {
+    const { username } = req.params;
+    userManagement.getUserDetailsByUsername(username, '/data/user/users.csv', (err, userDetails, message) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Error retrieving user data' });
+        }
+        if (!userDetails) {
+            return res.status(404).json({ success: false, message: message });
+        }
+        res.json({ success: true, data: userDetails });
+    });
+});
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

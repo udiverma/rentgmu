@@ -122,8 +122,6 @@ function verifyPassword(username, password, filename, callback) {
     });
 }
 
-
-
 // Function to write user data to a CSV file
 function writeUserToCSV(user, filename) {
     checkEmailExists(user.getEmail(), filename, (err, exists) => {
@@ -147,10 +145,47 @@ function writeUserToCSV(user, filename) {
     });
 }
 
+// Function to retrieve user details by username
+function getUserDetailsByUsername(username, filename, callback) {
+    const filePath = path.join(__dirname, filename);
+    fs.readFile(filePath, { encoding: 'utf8' }, (err, data) => {
+        if (err) {
+            console.error('Error reading from CSV file', err);
+            return callback(err);
+        }
+
+        csv.parse(data, {
+            columns: true,
+            skip_empty_lines: true
+        }, (err, users) => {
+            if (err) {
+                console.error('Error parsing CSV data', err);
+                return callback(err);
+            }
+            
+            const user = users.find(u => u.Username.toLowerCase() === username.toLowerCase());
+            if (!user) {
+                return callback(null, null, 'User not found');
+            }
+            
+            const userDetails = {
+                username: user.Username,
+                name: user.Name,
+                id: user.ID,
+                email: user.Email,
+                phone: user.Phone
+            };
+
+            callback(null, userDetails);
+        });
+    });
+}
+
 // At the end of your userManagement.js file
 module.exports = {
     User,
     checkEmailExists,
     verifyPassword,
-    writeUserToCSV
+    writeUserToCSV,
+    getUserDetailsByUsername
 };
