@@ -53,11 +53,14 @@ const Profile = (props) => {
             className="profile-image"
           />
           <div className="profile-name">
-            <h1>{currentUser.Name}</h1>
+            <h1>{currentUser.name}</h1>
           </div>
           <div className="profile-contact-info">
-            <p>Email Address: {currentUser.Email}</p>
-            {/* <p>Listings: </p> */}
+            <p><b>Username:</b> {currentUser.username}</p>
+            <p><b>ID:</b> {currentUser.id}</p>
+            <p><b>Email Address:</b> {currentUser.email}</p>
+            <p><b>Phone Number:</b> {currentUser.phone}</p>
+            {/* TODO: <p>Listings: </p> */}
           </div>
         </div>
       </div>

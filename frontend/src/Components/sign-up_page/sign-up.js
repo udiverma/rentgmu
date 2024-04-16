@@ -61,7 +61,7 @@ const SignUpForm = (props) => {
           const username = email.substring(0, email.indexOf('@'));
           
           // Store user information and login status in local storage
-          window.localStorage.setItem("userInfo", JSON.stringify({ username, name }));
+          window.localStorage.setItem("userInfo", JSON.stringify({ name, username, email, phoneNumber }));
           window.localStorage.setItem("isLoggedIn", "true");
   
           // Popup to inform the user about their username
