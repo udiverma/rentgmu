@@ -110,7 +110,7 @@ const SignUpForm = (props) => {
           </div>
           <div className="input-box">
             <input
-              type="password"
+              type="text"
               placeholder="Password"
               required
               value={password}
