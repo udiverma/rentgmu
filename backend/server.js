@@ -1,14 +1,20 @@
 const express = require('express');
 const fs = require('fs');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 const csvParser = require('csv-parse');
 const cors = require('cors');
 const app = express();
 const PORT = 3001;
 const userManagement = require('./userManagement'); 
-var id = 0;
+const listingManagement = require('./listingManagement');
 
 app.use(cors());
 app.use(express.json());
+
+app.get('/test', (req, res) => {
+    res.send('Hello World!')
+})
 
 app.post('/signup', (req, res) => {
     const { password, name, email, phone } = req.body;
@@ -19,7 +25,7 @@ app.post('/signup', (req, res) => {
         if (exists) {
             return res.status(409).json({ success: false, message: 'Email already exists' });
         }
-        id += 1
+        var id = bcrypt.hashSync(email.split('@')[0], saltRounds);
         const newUser = new userManagement.User(password, name, id, email, phone);
         newUser.setPassword(password); // This should ideally be synchronous or handled differently
         userManagement.writeUserToCSV(newUser, '/data/user/users.csv');
@@ -51,6 +57,34 @@ app.get('/user/:username', (req, res) => {
             return res.status(404).json({ success: false, message: message });
         }
         res.json({ success: true, data: userDetails });
+    });
+});
+
+app.post('/post-listing', (req, res) => {
+    const { category, name, description, price, payment_methods, image, contact_display, owner_id, listing_id } = req.body;
+
+    // Create a new listing instance
+    const newListing = new listingManagement.Listing(category, name, description, price, payment_methods, image, contact_display, owner_id, listing_id);
+
+    // Call writeListingToCSV to append the new listing to the CSV file
+    listingManagement.writeListingToCSV(newListing, '/data/listing/listings.csv', (err) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Error writing listing to CSV' });
+        }
+        res.json({ success: true, message: 'Listing posted successfully' });
+    });
+});
+
+app.post('/verify-ownership', (req, res) => {
+    const { username, listing_id } = req.body;
+    listingManagement.verifyOwnership(username, listing_id, '/data/listing/listings.csv', (err, isMatch, message) => {
+        if (err) {
+            return res.status(500).json({ success: false, message: 'Error verifying listing ownership' });
+        }
+        if (!isMatch) {
+            return res.status(401).json({ success: false, message: 'You are not the listing owner!' });
+        }
+        res.json({ success: true, message: 'Listing ownership verified successfully' });
     });
 });
 

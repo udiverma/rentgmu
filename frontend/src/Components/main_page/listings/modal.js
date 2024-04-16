@@ -63,11 +63,13 @@ export default function Modal({
         <div onClick={onModalClose} className="overlay"></div>
         <div className="modal-content">
           {content ? (
-            // Display the clicked box's details
             <>
               <h2>{content.name}</h2>
               <p>Description: {content.description}</p>
-              <p>Payments: {content.payments}</p>
+              <p>Price: ${content.price}</p>
+              <p>Payment Methods: {content.payments.join(', ')}</p>
+              <p>Image: {content.image ? <img src={content.image} alt={content.name} /> : 'No Image Provided'}</p>
+              <p>Contact Info: {content.displayContact ? content.contactInfo : 'Not Provided'}</p>
               <button onClick={sendRequest} className="modal-rent-item-btn">
                 Rent Item
               </button>
@@ -103,16 +105,37 @@ export default function Modal({
                 />
               </div>
               <div>
-                Payment Methods:
+                Price:
                 <input
-                  type="text"
-                  value={newBoxInfo.payments}
+                  type="number"
+                  min="0" 
+                  step="0.01"
+                  value={newBoxInfo.price}
                   onChange={(e) =>
-                    setNewBoxInfo({ ...newBoxInfo, payments: e.target.value })
+                    setNewBoxInfo({ ...newBoxInfo, price: e.target.value })
                   }
                   required
                   className="modal-entry"
                 />
+              </div>
+              <div className="payment-methods">
+                Payment Methods:
+                <div className="checkbox-group two-columns">
+                  {['Cash', 'Zelle', 'Venmo', 'CashApp', 'Apple Pay', 'Check', 'Cryptocurrency', 'Other'].map((method, index) => (
+                    <label key={method}>
+                      <input
+                        type="checkbox"
+                        checked={newBoxInfo.payments.includes(method)}
+                        onChange={(e) => {
+                          const updatedPayments = newBoxInfo.payments.includes(method)
+                            ? newBoxInfo.payments.filter((m) => m !== method)
+                            : [...newBoxInfo.payments, method];
+                          setNewBoxInfo({ ...newBoxInfo, payments: updatedPayments });
+                        }}
+                      /> {method}
+                    </label>
+                  ))}
+                </div>
               </div>
               <div>
                 Image:
@@ -122,6 +145,18 @@ export default function Modal({
                     setNewBoxInfo({ ...newBoxInfo, image: e.target.files[0] })
                   }
                 />
+              </div>
+              <div>
+                Display Contact Information:
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={newBoxInfo.displayContact}
+                    onChange={(e) =>
+                      setNewBoxInfo({ ...newBoxInfo, displayContact: e.target.checked })
+                    }
+                  /> Yes
+                </label>
               </div>
               <button className="modal-submit" type="submit">
                 Submit

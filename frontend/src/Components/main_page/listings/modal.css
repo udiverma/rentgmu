@@ -99,3 +99,18 @@ body.active-modal {
   transform: scale(1.02, 1.02);
   background-color: rgb(85, 226, 85);
 }
+
+.two-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-right: 5px;
+}
