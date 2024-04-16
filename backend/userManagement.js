@@ -8,7 +8,7 @@ class User {
     constructor(password, name, id, email, phone) {
         this._email = email;
         this._username = this.generateUsername(email);
-        this._password = this.setPassword(password); // Use synchronous hashing
+        this._password = password;
         this._name = name;
         this._id = id;
         this._phone = phone;
@@ -17,10 +17,6 @@ class User {
     generateUsername(email) {
         const username = email.split('@')[0];
         return username;
-    }
-
-    setPassword(password) {
-        return bcrypt.hashSync(password, saltRounds); // Synchronous password hashing
     }
 
     // Getters

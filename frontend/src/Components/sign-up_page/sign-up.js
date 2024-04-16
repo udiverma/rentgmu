@@ -48,10 +48,10 @@ const SignUpForm = (props) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          password,
           name,
           email,
-          password,
-          phone: phoneNumber
+          phoneNumber
         })
       })
       .then(response => response.json())
