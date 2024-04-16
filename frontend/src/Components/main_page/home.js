@@ -15,7 +15,7 @@ const API_URL = "http://www.omdbapi.com?apikey=fe19dab8";
 const stationary = {
   Title: "Pencil",
   Year: "3/28/2024",
-  Type: "stationary",
+  Type: "stationary / textbooks",
   Poster: statpic,
 };
 
@@ -29,7 +29,7 @@ const transportation = {
 const sport = {
   Title: "Football",
   Year: "3/25/2024",
-  Type: "sport",
+  Type: "sport equipment",
   Poster: sportpic,
 };
 

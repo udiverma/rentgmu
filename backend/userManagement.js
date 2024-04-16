@@ -6,12 +6,12 @@ const csv = require('csv-parse');
 
 class User {
     constructor(password, name, id, email, phone) {
-        this.email = email;
-        this.username = this.generateUsername(email);
-        this.password = this.setPassword(password); // Use synchronous hashing
-        this.name = name;
-        this.id = id;
-        this.phone = phone;
+        this._email = email;
+        this._username = this.generateUsername(email);
+        this._password = this.setPassword(password); // Use synchronous hashing
+        this._name = name;
+        this._id = id;
+        this._phone = phone;
     }
 
     generateUsername(email) {
@@ -24,49 +24,24 @@ class User {
     }
 
     // Getters
-    getUsername() {
-        return this.username;
+    get email() {
+        return this._email;
     }
 
-    getPassword() {
-        return this.password;
+    get username() {
+        return this._username;
     }
 
-    getName() {
-        return this.name;
+    get name() {
+        return this._name;
     }
 
-    getId() {
-        return this.id;
+    get id() {
+        return this._id;
     }
 
-    getEmail() {
-        return this.email;
-    }
-
-    getPhone() {
-        return this.phone;
-    }
-
-    // Setters
-    setUsername(username) {
-        this.username = username;
-    }
-
-    setName(name) {
-        this.name = name;
-    }
-
-    setId(id) {
-        this.id = id;
-    }
-
-    setEmail(email) {
-        this.email = email;
-    }
-
-    setPhone(phone) {
-        this.phone = phone;
+    get phone() {
+        return this._phone;
     }
 
     // Convert user data to CSV format
@@ -124,7 +99,7 @@ function verifyPassword(username, password, filename, callback) {
 
 // Function to write user data to a CSV file
 function writeUserToCSV(user, filename) {
-    checkEmailExists(user.getEmail(), filename, (err, exists) => {
+    checkEmailExists(user.email, filename, (err, exists) => {
         if (err) {
             console.error('Error checking email', err);
             return;
@@ -144,7 +119,6 @@ function writeUserToCSV(user, filename) {
         });
     });
 }
-
 // Function to retrieve user details by username
 function getUserDetailsByUsername(username, filename, callback) {
     const filePath = path.join(__dirname, filename);

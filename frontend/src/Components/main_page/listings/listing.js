@@ -38,13 +38,16 @@ const Box = ({ info, onRemove, onClick }) => {
   );
 };
 
-const Listing = () => {
+const Listing = ( /* put category header here*/ ) => {
   const [boxes, setBoxes] = useState([]);
   const initialBoxInfo = {
     name: "",
-    contact: "",
     description: "",
+    price: null,
+    payments: [],
     image: null,
+    displayContact: false,
+    contactInfo: ""
   };
   const [newBoxInfo, setNewBoxInfo] = useState(initialBoxInfo);
   const [showModal, setShowModal] = useState(false);
@@ -55,10 +58,9 @@ const Listing = () => {
       id: boxes.length + 1,
       info: boxData,
     };
-    setBoxes([...boxes, newBox]);
+    setBoxes([...boxes, newBox]); /* Implement server-side api call to add all listing into boxes */ 
     setNewBoxInfo(initialBoxInfo);
     setShowModal(false);
-    setNewBoxInfo(initialBoxInfo);
   };
 
   const handleBoxClick = (boxInfo) => {
@@ -70,10 +72,11 @@ const Listing = () => {
     setBoxes(boxes.filter((box) => box.id !== id));
   };
 
+
   return (
     <>
       <div className="listings-box-list">
-        {boxes.map((box) => (
+        {boxes.map((box) => ( /* use boxes.map [shouldn't have to do anything] to map all boxes*/
           <Box
             key={box.id}
             info={box.info}

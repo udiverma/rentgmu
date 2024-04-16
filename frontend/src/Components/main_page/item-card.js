@@ -5,9 +5,9 @@ const ItemCard = ({ item }, props) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (item.Type === "stationary") {
+    if (item.Type === "stationary / textbooks") {
       navigate("/stationary");
-    } else if (item.Type === "sport") {
+    } else if (item.Type === "sport equipment") {
       navigate("/sport");
     } else if (item.Type === "transportation") {
       navigate("/transportation");
