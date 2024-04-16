@@ -40,6 +40,10 @@ class User {
         return this._phone;
     }
 
+    get password() {
+        return this._password;
+    }    
+
     // Convert user data to CSV format
     toCSV() {
         return `${this.username},${this.password},${this.name},${this.id},${this.email},${this.phone}\n`;
