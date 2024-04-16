@@ -46,7 +46,6 @@ app.post('/verify-password', (req, res) => {
     });
 });
 
-// Add this route to your server.js file
 app.get('/user/:username', (req, res) => {
     const { username } = req.params;
     userManagement.getUserDetailsByUsername(username, '/data/user/users.csv', (err, userDetails, message) => {
