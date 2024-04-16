@@ -42,7 +42,7 @@ const SignUpForm = (props) => {
     if (!includeGmu(email)) {
       setError("Please enter a GMU email");
     } else {
-      fetch('http://18.207.114.103:443/signup', {
+      fetch('http://localhost:3001/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -120,9 +120,10 @@ const SignUpForm = (props) => {
           </div>
           <div className="input-box">
             <input
-              type="text"
+              type="tel"  // Change the input type to "tel"
               placeholder="Phone Number"
               required
+              pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"  // Add a pattern for phone number format (e.g., xxx-xxx-xxxx)
               value={phoneNumber}
               onChange={handlePhoneChange}
             />

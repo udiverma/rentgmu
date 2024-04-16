@@ -69,7 +69,7 @@ export default function Modal({
               <p>Price: ${content.price}</p>
               <p>Payment Methods: {content.payments.join(', ')}</p>
               <p>Image: {content.image ? <img src={content.image} alt={content.name} /> : 'No Image Provided'}</p>
-              <p>Contact Info: {content.displayContact ? content.contactInfo : 'Not Provided'}</p>
+              <p>Contact Info: {content.displayContact ? currentUser.email : 'Not Provided'}</p>
               <button onClick={sendRequest} className="modal-rent-item-btn">
                 Rent Item
               </button>

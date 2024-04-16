@@ -57,9 +57,7 @@ const Profile = (props) => {
           </div>
           <div className="profile-contact-info">
             <p><b>Username:</b> {currentUser.username}</p>
-            <p><b>ID:</b> {currentUser.id}</p>
             <p><b>Email Address:</b> {currentUser.email}</p>
-            <p><b>Phone Number:</b> {currentUser.phone}</p>
             {/* TODO: <p>Listings: </p> */}
           </div>
         </div>
