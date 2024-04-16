@@ -26,8 +26,8 @@ app.post('/signup', (req, res) => {
             return res.status(409).json({ success: false, message: 'Email already exists' });
         }
         var id = bcrypt.hashSync(email.split('@')[0], saltRounds);
-        const newUser = new userManagement.User(password, name, id, email, phone);
-        newUser.setPassword(password); // This should ideally be synchronous or handled differently
+        var cryptPassword = bcrypt.hashSync(password, saltRounds);
+        const newUser = new userManagement.User(cryptPassword, name, id, email, phone);
         userManagement.writeUserToCSV(newUser, '/data/user/users.csv');
         res.json({ success: true, message: 'User registered successfully' });
     });
