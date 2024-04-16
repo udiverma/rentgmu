@@ -42,7 +42,7 @@ const SignUpForm = (props) => {
     if (!includeGmu(email)) {
       setError("Please enter a GMU email");
     } else {
-      fetch('http://18.207.114.103:3001/signup', {
+      fetch('http://18.207.114.103:443/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

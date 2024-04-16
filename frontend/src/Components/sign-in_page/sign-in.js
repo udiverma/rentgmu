@@ -24,7 +24,7 @@ const SignInForm = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // API request to verify the username and password
-    fetch('http://18.207.114.103:3001/verify-password', {
+    fetch('http://18.207.114.103:443/verify-password', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ const SignInForm = (props) => {
     .then(data => {
       if (data.success) {
         props.setIsUserSignedIn(true);
-        fetch(`http://18.207.114.103:3001/user/${username}`)
+        fetch(`http://18.207.114.103:443/user/${username}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
