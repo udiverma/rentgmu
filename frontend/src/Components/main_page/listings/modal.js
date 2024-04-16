@@ -27,7 +27,7 @@ export default function Modal({
         "]. Please contact them with this phone number: " +
         currentUser.Phone;
 
-      const ownerNum = "+15719928316"; //+ owner.Phone;
+      const ownerNum = "+13154861688"; //+ owner.Phone;
       const response = await fetch(APIendpoint, {
         method: "POST",
         body: JSON.stringify({ Text: message, Phone: ownerNum }),

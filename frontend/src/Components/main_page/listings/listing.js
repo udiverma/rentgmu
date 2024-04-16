@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "./modal.js";
 import "./listing.css";
+import textbook from "../images/mathtextbook.png";
 
 const stringifiedUser = window.localStorage.getItem("userInfo");
 const currentUser = JSON.parse(stringifiedUser);
@@ -39,7 +40,19 @@ const Box = ({ info, onRemove, onClick }) => {
 };
 
 const Listing = ( /* put category header here*/ ) => {
-  const [boxes, setBoxes] = useState([]);
+  const initialBox = {
+    id: 1,
+    info: {
+      name: "Loc's Textbook",
+      description: "Textbook for Math Class",
+      price: 20.00,
+      payments: ["Cash", "Venmo"],
+      image: null,
+      displayContact: false,
+      contactInfo: "sample@gmu.edu"
+    }
+  };
+  const [boxes, setBoxes] = useState([initialBox]);
   const initialBoxInfo = {
     name: "",
     description: "",
