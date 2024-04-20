@@ -138,14 +138,16 @@ function verifyOwnership(username, listing_id, filename, callback) {
     });
 }
 
-function writeListingToCSV(listing, filename) {
+function writeListingToCSV(listing, filename, callback) {
     const filePath = path.join(__dirname, filename);
     fs.appendFile(filePath, listing.toCSV(), (err) => {
         if (err) {
             console.error('Error writing to CSV file', err);
+            callback(err);  // Notify the caller of the error
             return;
         }
         console.log('Listing added to CSV file successfully.');
+        callback(null);  // Notify the caller of success, no error occurred
     });
 }
 

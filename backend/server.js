@@ -87,6 +87,12 @@ app.post('/verify-ownership', (req, res) => {
     });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// Export the app for testing
+module.exports = app;
+
+// Conditionally start the server if not required by a test
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
